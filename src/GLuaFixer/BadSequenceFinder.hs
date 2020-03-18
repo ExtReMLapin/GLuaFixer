@@ -58,7 +58,9 @@ aiWarnings = libraryWarnings "ai" $
 mathWarnings :: AParser String
 mathWarnings = libraryWarnings "math" $
     const "Use math.Distance instead" <$> ident "Dist" <|>
-    const "Use math.fmod instead" <$> ident "mod"
+    const "Use math.fmod instead" <$> ident "mod" <|>
+    const "Not JIT compiled" <$> ident "fmod" <|>
+    const "Not JIT compiled" <$> ident "frexp"
 
 
 -- | Warnings for the spawnmenu library
@@ -72,7 +74,11 @@ spawnmenuWarnings = libraryWarnings "spawnmenu" $
 stringWarnings :: AParser String
 stringWarnings = libraryWarnings "string" $
     const "Use either string.sub(str, index, index) or str[index]" <$> ident "GetChar" <|>
-    const "Use string.gmatch instead" <$> ident "gfind"
+    const "Use string.gmatch instead" <$> ident "gfind" <|>
+    const "Not JIT compiled" <$> ident "dump" <|>
+    const "Not JIT compiled" <$> ident "gmatch" <|>
+    const "Not JIT compiled" <$> ident "gsub" <|>
+    const "Not JIT compiled" <$> ident "match"
 
 -- | Warnings for the surface library
 surfaceWarnings :: AParser String
@@ -96,7 +102,10 @@ tableWarnings = libraryWarnings "table" $
     ) <|>
     const "Use #tbl instead"      <$> ident "GetLastKey"   <|>
     const "Use tbl[#tbl] instead" <$> ident "GetLastValue" <|>
-    const "Use #tbl instead"      <$> ident "getn"
+    const "Use #tbl instead"      <$> ident "getn" <|>
+    const "Not JIT compiled" <$> ident "maxn" <|>
+    const "Not JIT compiled" <$> ident "sort" <|>
+    const "Not JIT compiled" <$> ident "unpack"
 
 
 -- | Warnings for the timer library
